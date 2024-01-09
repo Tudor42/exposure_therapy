@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Threading;
 
 namespace ExposureThrepay
 {
@@ -12,12 +13,12 @@ namespace ExposureThrepay
     {
         [SerializeField]
         public GameObject selectLevelButton;
-
         [SerializeField]
         public GameObject levelDescriptionLabel;
-
         [SerializeField]
         public GameObject timerLabel;
+        [SerializeField]
+        public Button nextLevelButton;
 
         [SerializeField]
         List<string> levelTexts = new List<string>
@@ -25,9 +26,9 @@ namespace ExposureThrepay
         List<string> levelDescriptions = new List<string>
             { "Look at a statue for some time.", "Listen to some barking.", "Experiece the feeling of a dog trying to come in your room.", "Experiece the feeling of a dog walking in your room." };
         List<string> sceneNames = new List<string>
-            { "StaticExposure", "Listen to some barking.", "Experiece the feeling of a dog trying to come in your room.", "Experiece the feeling of a dog walking in your room." };
+            { "StaticExposure", "StaticExposure", "StaticExposure", "StaticExposure" };
         List<int> levelDuration = new List<int>
-            { 60 * 10, 60 * 10, 60 * 10, 60 * 10 };
+            { 1 * 3, 1 * 10, 60 * 10, 60 * 10 };
 
         int current_step = 0;
 
@@ -67,7 +68,7 @@ namespace ExposureThrepay
 
         public void SelectScene()
         {
-            DisableAllLights();
+           DisableAllLights();
 
            SceneManager.LoadScene(sceneNames[current_step], LoadSceneMode.Additive);
         }
@@ -103,12 +104,12 @@ namespace ExposureThrepay
             return (time / 60).ToString() + ":" + (time % 60).ToString();
         }
 
-        public void SetTimerText(int time)
+        public void SetTimerText(string time)
         {
             TextMeshProUGUI labelText = timerLabel.GetComponent<TextMeshProUGUI>();
             if (labelText != null)
             {
-                labelText.text = ConvertToString(time);
+                labelText.text = time;
             }
             else
             {
@@ -132,16 +133,46 @@ namespace ExposureThrepay
             }
         }
 
+        void UnloadCurrentScene()
+        {
+            StartCoroutine(UnloadSceneAsync(() =>
+            {
+                Next();
+            }));
+        }
+
+        IEnumerator UnloadSceneAsync(System.Action callback)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            SceneManager.UnloadSceneAsync(sceneNames[current_step]);
+
+            callback?.Invoke();
+        }
+
+        public void NextInLevel()
+        {
+            UnloadCurrentScene();
+        }
+
+        void LevelFinished()
+        {
+            if (nextLevelButton != null)
+            {
+                nextLevelButton.interactable = true;
+            }
+            SetTimerText("Finished!");
+        }
+
         IEnumerator Countdown(int duration)
         {
             while (duration > 0)
             {
-                SetTimerText(duration);
+                SetTimerText(ConvertToString(duration));
                 yield return new WaitForSeconds(1f);
                 duration--;
             }
-
-            Next();
+            LevelFinished();
         }
 
         public void updateLevelText(int current_step)
