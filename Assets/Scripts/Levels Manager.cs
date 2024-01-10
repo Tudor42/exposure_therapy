@@ -30,7 +30,7 @@ namespace ExposureThrepay
         List<string> sceneNames = new List<string>
             { "StaticExposure", "SoundExposure", "StaticExposure", "DogSitting", "StaticExposure" };
         List<int> levelDuration = new List<int>
-            { 60 * 10, 60 * 10, 60 * 10, 60 * 10, 60 * 1 };
+            { 60 * 10, 60 * 10, 60 * 15, 60 * 15, 60 * 15 };
 
         int current_step = 0;
         bool finished = false;
@@ -122,7 +122,7 @@ namespace ExposureThrepay
 
         void StartCountdown()
         {
-            StopCountdown();
+            //StopCountdown();
 
             countdownCoroutine = StartCoroutine(Countdown(levelDuration[current_step]));
         }

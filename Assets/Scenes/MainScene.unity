@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2567,6 +2567,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1305149777}
+        m_TargetAssemblyTypeName: ExposureThrepay.LevelsManager, Assembly-CSharp
+        m_MethodName: UnloadCurrentScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &594350391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2749,6 +2761,10 @@ PrefabInstance:
     - target: {fileID: -5517690373917586611, guid: 8d96f685ecfd91e4d9d1f6f491f81dc9, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: -4816174695025822239, guid: 8d96f685ecfd91e4d9d1f6f491f81dc9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: -4640664487230668961, guid: 8d96f685ecfd91e4d9d1f6f491f81dc9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2958,6 +2974,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: ExposureThrepay.LevelsManager, Assembly-CSharp
         m_MethodName: SetFinished
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1305149777}
+        m_TargetAssemblyTypeName: ExposureThrepay.LevelsManager, Assembly-CSharp
+        m_MethodName: UnloadCurrentScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
