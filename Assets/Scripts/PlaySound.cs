@@ -14,8 +14,11 @@ public class PlaySound : MonoBehaviour
         audio.Play();
     }
 
-    void Update()
+    void OnDestroy()
     {
-        
+        if (audio != null)
+        {
+            audio.Stop();
+        }
     }
 }

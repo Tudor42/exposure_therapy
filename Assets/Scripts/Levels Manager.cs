@@ -24,13 +24,13 @@ namespace ExposureThrepay
 
         [SerializeField]
         List<string> levelTexts = new List<string>
-            { "Static exposure", "Sound exposure", "Dog behind fence", "Dog walking" };
+            { "Static exposure", "Sound exposure", "Dog behind fence", "Dog sitting", "Dog walking" };
         List<string> levelDescriptions = new List<string>
-            { "Look at a statue for some time.", "Listen to some barking.", "Experiece the feeling of a dog trying to come in your room.", "Experiece the feeling of a dog walking in your room." };
+            { "Look at a statue for some time.", "Listen to some barking.", "Experience the feeling of a dog trying to come in your room.", "Experience the feeling of a dog sitting in front of you.", "Experience the feeling of a dog walking in your room." };
         List<string> sceneNames = new List<string>
-            { "StaticExposure", "SoundExposure", "StaticExposure", "StaticExposure" };
+            { "StaticExposure", "SoundExposure", "StaticExposure", "DogSitting", "StaticExposure" };
         List<int> levelDuration = new List<int>
-            { 1 * 3, 1 * 10, 60 * 10, 60 * 10 };
+            { 60 * 10, 60 * 10, 60 * 10, 60 * 10, 60 * 1 };
 
         int current_step = 0;
         bool finished = false;
@@ -136,27 +136,23 @@ namespace ExposureThrepay
             }
         }
 
-        void UnloadCurrentScene()
+        public void UnloadCurrentScene()
         {
-            StartCoroutine(UnloadSceneAsync(() =>
-            {
-                Next();
-            }));
+            StartCoroutine(UnloadSceneAsync());
         }
 
-        IEnumerator UnloadSceneAsync(System.Action callback)
+        IEnumerator UnloadSceneAsync()
         {
             yield return new WaitForSeconds(0.1f);
 
             SceneManager.UnloadSceneAsync(sceneNames[current_step]);
-
-            callback?.Invoke();
         }
 
         public void NextInLevel()
         {
-            UnloadCurrentScene();
+            //UnloadCurrentScene();
             nextLevelButton.interactable = false;
+            Next();
         }
 
         void LevelFinished()
@@ -222,7 +218,7 @@ namespace ExposureThrepay
                     writer.WriteLine(feedback);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                
             }
