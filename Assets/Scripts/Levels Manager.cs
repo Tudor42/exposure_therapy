@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Threading;
+using System;
+using System.IO;
 
 namespace ExposureThrepay
 {
@@ -31,6 +33,7 @@ namespace ExposureThrepay
             { 1 * 3, 1 * 10, 60 * 10, 60 * 10 };
 
         int current_step = 0;
+        bool finished = false;
 
         private Coroutine countdownCoroutine;
 
@@ -196,6 +199,32 @@ namespace ExposureThrepay
                 current_step = levelTexts.Count - 1;
             }
             updateLevelText(current_step);
+        }
+
+        public void SetFinished(bool finished)
+        {
+            this.finished = finished;
+        }
+
+        public void SaveProgressToFile(string feedback)
+        {
+            string fileName = levelTexts[current_step] + "_" + DateTime.Now.Ticks + ".txt";
+            string filePath = Path.Combine("./History/", fileName);
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    writer.WriteLine("Level " + current_step.ToString());
+                    writer.WriteLine(levelTexts[current_step]);
+                    writer.WriteLine(finished ? "Finished" : "Not finished");
+                    writer.WriteLine(DateTime.Now.ToString());
+                    writer.WriteLine(feedback);
+                }
+            }
+            catch (Exception ex)
+            {
+               
+            }
         }
 
         void OnDestroy()
