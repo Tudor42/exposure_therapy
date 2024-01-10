@@ -28,7 +28,7 @@ namespace ExposureThrepay
         List<string> levelDescriptions = new List<string>
             { "Look at a statue for some time.", "Listen to some barking.", "Experiece the feeling of a dog trying to come in your room.", "Experiece the feeling of a dog walking in your room." };
         List<string> sceneNames = new List<string>
-            { "StaticExposure", "StaticExposure", "StaticExposure", "StaticExposure" };
+            { "StaticExposure", "SoundExposure", "StaticExposure", "StaticExposure" };
         List<int> levelDuration = new List<int>
             { 1 * 3, 1 * 10, 60 * 10, 60 * 10 };
 
