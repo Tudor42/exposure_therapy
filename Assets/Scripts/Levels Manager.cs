@@ -156,6 +156,7 @@ namespace ExposureThrepay
         public void NextInLevel()
         {
             UnloadCurrentScene();
+            nextLevelButton.interactable = false;
         }
 
         void LevelFinished()
